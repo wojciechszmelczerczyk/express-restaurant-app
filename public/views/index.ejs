@@ -75,19 +75,24 @@
                     </div>
                     <div class="col-xs-12 text-center menu-1 menu-wrap">
                         <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="menu">Menu</a></li>
                             <li class="has-dropdown">
-                                <a href="gallery.html">Gallery</a>
+                                <a href="gallery">Gallery</a>
                                 <ul class="dropdown">
                                     <li><a href="#">Events</a></li>
                                     <li><a href="#">Food</a></li>
-                                    <li><a href="#">Coffees</a></li>
                                 </ul>
                             </li>
-                            <li><a href="reservation.html">Reservation</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li class="has-dropdown">
+                                <a href="order">Order</a>
+                                <ul class="dropdown">
+                                    <li><a href="/your-order">Your orders</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="about">About</a></li>
+                            <li><a href="contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -157,20 +162,18 @@
                         <div class="fh5co-item">
                             <img src="static/images/menu_pizza.jpg" class="img-responsive"
                                 alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
-                            <h3>Bake Potato Pizza</h3>
-                            <span class="fh5co-price">$20<sup>.50</sup></span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero
-                                alias quaerat inventore molestias vel suscipit explicabo.</p>
+                            <h3><%- name[0] -%></h3>
+                            <span class="fh5co-price"><%- price[0] -%><sup>.50</sup></span>
+                            <p><%- description[0] -%></p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
                         <div class="fh5co-item margin_top">
                             <img src="static/images/menu-pizza2.jpg" class="img-responsive"
                                 alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
-                            <h3>Salted Fried Chicken</h3>
-                            <span class="fh5co-price">$19<sup>.00</sup></span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero
-                                alias quaerat inventore molestias vel suscipit explicabo.</p>
+                            <h3><%- name[1] -%></h3>
+                            <span class="fh5co-price"><%- price[1] -%><sup>.00</sup></span>
+                            <p><%- description[1] -%></p>
                         </div>
                     </div>
                     <div class="clearfix visible-sm-block visible-xs-block"></div>
@@ -349,7 +352,7 @@
                             <div class="blog-text">
                                 <span class="posted_on">Feb. 15th 2016</span>
                                 <h3><a href="#">Karaoke contest</a></h3>
-                                <p>What connect people more (beside eating) than singing? Try yourself in on and only
+                                <p>What connect people more (beside eating) than singing? Try yourself in one and only
                                     Karaoke Master Night!</p>
                                 <ul class="stuff">
                                     <li><i class="icon-heart2"></i>8K</li>

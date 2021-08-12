@@ -14,14 +14,11 @@ function getDB() {
 
             const menu = db.collection('menu'); // collection
 
-            menu.insertOne({
-                name: 'Pizza',
-                price: '$10',
-
-            })
 
 
-        } // client.close(); //something wrong with ending connection 
+
+        }
+        // client.close(); //something wrong with ending connection 
 
     });
 }

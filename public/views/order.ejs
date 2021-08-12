@@ -49,6 +49,8 @@
 
 	<!-- Flexslider  -->
 	<link rel="stylesheet" href="static/css/flexslider.css">
+	<!-- Date Time -->
+	<link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="static/css/style.css">
@@ -77,18 +79,18 @@
 					<div class="col-xs-12 text-center menu-1 menu-wrap">
 						<ul>
 							<li><a href="/">Home</a></li>
-							<li><a href="menu.html">Menu</a></li>
-							<li class="has-dropdown active">
-								<a href="gallery.html">Gallery</a>
+							<li><a href="menu">Menu</a></li>
+							<li class="has-dropdown">
+								<a href="gallery">Gallery</a>
 								<ul class="dropdown">
 									<li><a href="#">Events</a></li>
 									<li><a href="#">Food</a></li>
 									<li><a href="#">Coffees</a></li>
 								</ul>
 							</li>
-							<li><a href="reservation.html">Reservation</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li class="active"><a href="order">Order</a></li>
+							<li><a href="about">About</a></li>
+							<li><a href="contact">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -105,7 +107,7 @@
 					<div class="col-md-12 text-center">
 						<div class="display-t js-fullheight">
 							<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-								<h1>See <em>Our</em> Gallery</h1>
+								<h1>Reserved a Table Today!</h1>
 								<h2>Brought to you by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a>
 								</h2>
 							</div>
@@ -116,11 +118,11 @@
 		</header>
 
 
-		<div id="fh5co-gallery" class="fh5co-section">
+		<div id="fh5co-reservation-form" class="fh5co-section">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 fh5co-heading animate-box">
-						<h2>Our Gallery</h2>
+						<h2>Reservation</h2>
 						<div class="row">
 							<div class="col-md-6">
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit
@@ -131,74 +133,46 @@
 						</div>
 					</div>
 
+					<div class="col-md-6 col-md-push-6 col-sm-6 col-sm-push-6">
+						<form action="/your-order" id="form-wrap" method="POST">
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="pizza">Choose Pizza</label>
+									<select name="many" id="pizza" class="form-control custom_select">
+										<option value="#" style="color: black;"><%- name[0] -%></option>
+										<option value="#" style="color: black;"><%- name[1] -%></option>
+										<option value="#" style="color: black;">pineapple</option>
+										<option value="#" style="color: black;">olives</option>
+									</select>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="many">Ingredients</label>
+									<select name="many" id="many" class="form-control custom_select">
+										<option value="#" style="color: black;">mushrooms</option>
+										<option value="#" style="color: black;">tomatoes</option>
+										<option value="#" style="color: black;">pineapple</option>
+										<option value="#" style="color: black;">olives</option>
+									</select>
+								</div>
+							</div>
+							<!-- <div class="row form-group">
+								<div class="col-md-12">
+									<label for="taskdatetime">When</label>
+									<input type="text" name="task-datetime" id="taskdatetime" class="form-control" />
+								</div>
+							</div> -->
+							<div class="row form-group">
+								<div class="col-md-12">
+									<input type="submit" class="btn btn-primary btn-outline btn-lg" value="Submit Form">
+								</div>
+							</div>
 
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-						<div class="fh5co-bg-img fh5co-gallery_big"
-							style="background-image: url(static/images/Francesca.jpg);" data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-						<div class="fh5co-bg-img fh5co-gallery_big"
-							style="background-image: url(static/images/Francesca.jpg);" data-trigger="zoomerang"></div>
-					</div>
-
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-						<div class="fh5co-bg-img fh5co-gallery_big"
-							style="background-image: url(static/images/Francesca.jpg);" data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
+						</form>
 					</div>
 
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-						<div class="fh5co-bg-img" style="background-image: url(static/images/Francesca.jpg);"
-							data-trigger="zoomerang"></div>
-					</div>
-					<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-						<div class="fh5co-bg-img fh5co-gallery_big"
-							style="background-image: url(static/images/Francesca.jpg);" data-trigger="zoomerang"></div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -223,15 +197,16 @@
 					</div>
 					<div class="col-md-7 animate-box" data-animate-effect="fadeInRight">
 						<blockquote>
-							<p> &ldquo; Quantum ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab
-								debitis sit itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus
-								aliquam voluptates corporis et tempora consequuntur ipsam. &rdquo;</p>
-							<p class="author"><cite>&mdash; Jane Smith</cite></p>
+							<p> &ldquo; Mamma Mia is more than just pizzeria. It is home. Home for us -
+								pizza lovers. &rdquo;</p>
+							<p class="author"><cite>&mdash; Saraham Malik</cite></p>
 						</blockquote>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
 
 		<div id="fh5co-started" class="fh5co-section animate-box"
 			style="background-image: url(static/images/MammaMia_main.jpg);" data-stellar-background-ratio="0.5">
@@ -243,8 +218,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae enim quae vitae
 							cupiditate, sequi quam ea id dolor reiciendis consectetur repudiandae. Rem quam, repellendus
 							veniam ipsa fuga maxime odio? Eaque!</p>
-						<p><a href="mailto:info@yourdomainname.com" class="btn btn-primary btn-outline">Contact Us</a>
-						</p>
+						<p><a href="reservation" class="btn btn-primary btn-outline">Book Now</a></p>
 					</div>
 				</div>
 			</div>
@@ -330,20 +304,14 @@
 	<script src="static/js/jquery.stellar.min.js"></script>
 	<!-- Flexslider -->
 	<script src="static/js/jquery.flexslider-min.js"></script>
-	<script src="static/js/zoomerang.js"></script>
+
+	<!-- Date Time -->
+	<script src="static/js/moment.min.js"></script>
+	<script src="static/js/bootstrap-datetimepicker.js"></script>
+
+
 	<!-- Main -->
 	<script src="static/js/main.js"></script>
-
-	<script>
-		Zoomerang
-			.config({
-				maxHeight: 600,
-				maxWidth: 900,
-				bgColor: '#000',
-				bgOpacity: .85
-			})
-			.listen('[data-trigger="zoomerang"]')
-	</script>
 
 </body>
 
