@@ -4,3 +4,7 @@ node_modules
 # exec files
 .*
 !.gitignore 
+
+# questions file
+
+questions.md

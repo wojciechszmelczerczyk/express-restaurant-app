@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tasty &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
+    <title>Mamma Mia &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords"
@@ -46,11 +46,8 @@
     <link rel="stylesheet" href="static/css/icomoon.css">
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="static/css/bootstrap.css">
-
     <!-- Flexslider  -->
     <link rel="stylesheet" href="static/css/flexslider.css">
-    <!-- Date Time -->
-    <link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
 
     <!-- Theme style  -->
     <link rel="stylesheet" href="static/css/style.css">
@@ -78,17 +75,22 @@
                     </div>
                     <div class="col-xs-12 text-center menu-1 menu-wrap">
                         <ul>
-                            <li><a href="/">Home</a></li>
+                            <li class="active"><a href="/">Home</a></li>
                             <li><a href="menu">Menu</a></li>
                             <li class="has-dropdown">
                                 <a href="gallery">Gallery</a>
                                 <ul class="dropdown">
                                     <li><a href="#">Events</a></li>
                                     <li><a href="#">Food</a></li>
-                                    <li><a href="#">Coffees</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="order">Order</a></li>
+                            <li class="has-dropdown">
+                                <a href="order">Order</a>
+                                <ul class="dropdown">
+                                    <li><a href="/your-order">Your orders</a></li>
+                                </ul>
+                            </li>
+
                             <li><a href="about">About</a></li>
                             <li><a href="contact">Contact</a></li>
                         </ul>
@@ -107,7 +109,7 @@
                     <div class="col-md-12 text-center">
                         <div class="display-t js-fullheight">
                             <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-                                <h1>Reserved a Table Today!</h1>
+                                <h1>The Best Pizza <em></em> Restaurant <em>in</em> Lombardia</h1>
                                 <h2>Brought to you by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a>
                                 </h2>
                             </div>
@@ -116,31 +118,3 @@
                 </div>
             </div>
         </header>
-
-        <h1><%- from -%> <%- to -%></h1>
-
-
-
-        <div id="fh5co-reservation-form" class="fh5co-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 fh5co-heading animate-box">
-                        <h2>Reservation</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit
-                                    itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam
-                                    voluptates corporis et tempora consequuntur ipsam, itaque, nesciunt similique
-                                    commodi omnis. Ad magni perspiciatis, voluptatum repellat.</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-        </div>
-
-        <%-include('./partials/footer.ejs')-%>
