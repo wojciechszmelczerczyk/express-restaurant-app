@@ -166,7 +166,6 @@ function wrapper(app) {
                     const db = client.db('MammaMia');
 
                     const order = db.collection('order');
-
                     order.find({}).toArray((err, items) => {
                         if (err) {
                             console.log(err);
