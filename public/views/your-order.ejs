@@ -99,15 +99,15 @@
                 </div>
 
             </div>
-            <!-- </div> -->
+            <!--loop through order collection-->
+            <ul id="orders">
+                <% names.forEach(name => { %>
+                <li><%= name.name %></li><br>
+                <% }); %>
+            </ul>
         </nav>
 
-        <!--loop through order collection-->
-        <ul id="orders">
-            <% names.forEach(name => { %>
-            <li><%= name.name %></li><br>
-            <% }); %>
-        </ul>
+
 
 
         <!-- jQuery -->

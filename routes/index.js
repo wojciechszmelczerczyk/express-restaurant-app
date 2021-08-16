@@ -1,6 +1,6 @@
 const path = require('path');
-const express = require('express');
-const app = express();
+// const express = require('express');
+// const app = express();
 
 //controller
 const mammaMiaController = require('../controllers/mammaMiaController');
@@ -8,7 +8,7 @@ const mammaMiaController = require('../controllers/mammaMiaController');
 
 //database
 const mongo = require('mongodb');
-const e = require('express');
+const express = require('express');
 const client = new mongo.MongoClient('mongodb://localhost:27017', { // connect to mongodb
     useNewUrlParser: true
 });
