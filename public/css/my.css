@@ -1,0 +1,12 @@
+/* #orders {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+} */
+
+#orders>li {
+    background-color: #ea272d;
+    color: white;
+    list-style: none;
+}
