@@ -41,29 +41,29 @@
     <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
 
     <!-- Animate.css -->
-    <link rel="stylesheet" href="static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="static/css/icomoon.css">
+    <link rel="stylesheet" href="/static/css/icomoon.css">
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
 
     <!-- Flexslider  -->
-    <link rel="stylesheet" href="static/css/flexslider.css">
+    <link rel="stylesheet" href="/static/css/flexslider.css">
     <!-- Date Time -->
-    <link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css">
 
     <!-- Theme style  -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
     <!-- Modernizr JS -->
-    <script src="static/js/modernizr-2.6.2.min.js"></script>
+    <script src="/static/js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
     <!--Additional style-->
-    <link rel="stylesheet" href="static/css/my.css">
+    <link rel="stylesheet" href="/static/css/my.css">
 
 </head>
 
@@ -99,35 +99,57 @@
                 </div>
 
             </div>
-            <!--loop through order collection-->
+            <% const {name, price, ingredients} = pizza; %>
+            <div id="detailsPizza">
+                <h1 id="orderTitle">Your Order</h1>
+                <label for="pizza" id="labelPizza">Name: <%= name %></label>
+                <label for="pizza" id="labelPrice">Price: </label>
+                <label for="pizza" id="labelIngredients">Ingredients: <%= ingredients %></label>
+                <a class="delete" data-doc="<%= pizza._id %>" href="/your-order">Delete order</a>
 
-            <ul id="orders">
-                <% names.forEach(name => { %>
-                <a href="/your-order/<%= name._id %>" class="single">
-                    <li><%= name.name %></li><br>
-                </a>
-
-                <% }); %>
-            </ul>
+            </div>
         </nav>
 
 
 
 
+
+
         <!-- jQuery -->
-        <script src="static/js/jquery.min.js"></script>
+        <script src="/static/js/jquery.min.js"></script>
         <!-- jQuery Easing -->
-        <script src="static/js/jquery.easing.1.3.js"></script>
+        <script src="/static/js/jquery.easing.1.3.js"></script>
         <!-- Bootstrap -->
-        <script src="static/js/bootstrap.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
         <!-- Waypoints -->
-        <script src="static/js/jquery.waypoints.min.js"></script>
+        <script src="/static/js/jquery.waypoints.min.js"></script>
         <!-- Waypoints -->
-        <script src="static/js/jquery.stellar.min.js"></script>
+        <script src="/static/js/jquery.stellar.min.js"></script>
         <!-- Flexslider -->
-        <script src="static/js/jquery.flexslider-min.js"></script>
+        <script src="/static/js/jquery.flexslider-min.js"></script>
         <!-- Main -->
-        <script src="static/js/main.js"></script>
+        <script src="/static/js/main.js"></script>
+
+        <script>
+            //I DONT GET THIS PART, LEARN IT
+            //---------------------------------------------------------------
+            const trash = document.querySelector('a.delete');
+            trash.addEventListener('click', (e) => {
+                const endpoint = `/your-order/${trash.dataset.doc}`
+
+                fetch(endpoint, {
+                        method: 'DELETE',
+
+                    }).then((response) => response.json())
+                    .then((data) => console.log(data))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            })
+
+
+            //---------------------------------------------------------------
+        </script>
 
 </body>
 

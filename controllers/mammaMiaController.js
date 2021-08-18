@@ -21,9 +21,9 @@ const mammaMiaHome = (req, res) => {
                     console.log(err);
                 } else {
                     res.render(path.join(__dirname, '../public/views', 'index.ejs'), {
-                        name: [items[0].name, items[1].name, items[2].name, items[3].name], //optimalize with foreach
-                        price: [items[0].price, items[1].price, items[2].price, items[3].price], //optimalize with foreach
-                        description: [items[0].description, items[1].description, items[2].description, items[3].description] //optimalize with foreach
+                        name: [items[0].name, items[1].name, items[2].name, items[3].name], // optimalize with foreach
+                        price: [items[0].price, items[1].price, items[2].price, items[3].price], // optimalize with foreach
+                        description: [items[0].description, items[1].description, items[2].description, items[3].description] // optimalize with foreach
 
                     });
                 }
@@ -48,7 +48,6 @@ const mammaMiaMenu = (req, res) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(items);
                     res.render(path.join(__dirname, '../public/views', 'menu.ejs'), {
                         name: [items[0].name, items[1].name, items[2].name, items[3].name, items[4].name, items[5].name, items[6].name, items[7].name], //optimalize with foreach
                         price: [items[0].price, items[1].price, items[2].price, items[3].price, items[4].price, items[5].price, items[6].price, items[7].price], //optimalize with foreach
@@ -104,7 +103,7 @@ const mammaMiaOrder = (req, res) => {
                 } else {
                     res.render(path.join(__dirname, '../public/views', 'order.ejs'), {
                         name: [items[0].name, items[1].name, items[2].name, items[3].name, items[4].name, items[5].name, items[6].name, items[7].name], //optimalize with foreach
-
+                        ingredients: [items[0].ingredients[0], items[0].ingredients[1], items[0].ingredients[2], items[0].ingredients[3]],
                     });
                 }
             });
@@ -129,7 +128,7 @@ const mammaMiaYourOrderGet = (req, res) => {
                     console.log(err);
                 } else {
                     res.render(path.join(__dirname, '../public/views', 'your-order.ejs'), {
-                        names: items
+                        names: items,
 
                     });
                 }
@@ -149,14 +148,75 @@ const mammaMiaYourOrderPost = (req, res) => {
             const db = client.db('MammaMia');
 
             const order = db.collection('order');
-            // console.log(req.body.from); //undefined
             order.insertOne({
-                name: req.body.to // working
+                name: req.body.to,
+                // price: order.
+                ingredients: req.body.to2 // working
             })
-            res.redirect('/');
+            res.redirect('/your-order');
 
         }
     });
+}
+
+const mammaMiaYourOrderGetSingle = (req, res) => {
+    const id = req.params.id; //extract id parameter
+    client.connect((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Connected to the database');
+
+            const db = client.db('MammaMia');
+
+            const order = db.collection('order');
+
+            order.findOne({
+                    _id: mongo.ObjectId(id)
+                })
+                .then(result => {
+                    if (result) {
+                        res.render(path.join(__dirname, '../public/views', 'details.ejs'), {
+                            pizza: result
+                        });
+                    } else {
+                        console.log(`No documents matches the provided query`)
+
+                    }
+                })
+                .catch(err => console.log(`Failed to find document: ${err}`));
+
+
+        }
+    });
+}
+
+const mammaMiaYourOrderDelete = (req, res) => {
+    const id = req.params.id;
+    client.connect((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Connected to the database');
+
+            const db = client.db('MammaMia');
+
+            const order = db.collection('order');
+
+            order.findOneAndDelete({
+                    _id: mongo.ObjectId(id)
+                })
+                .then(result => {
+                    res.json({
+                        redirect: '/your-order'
+                    })
+                })
+                .catch(err => console.log(err));
+
+
+        }
+    });
+
 }
 
 const mammaMiaAbout = (req, res) => {
@@ -165,7 +225,10 @@ const mammaMiaAbout = (req, res) => {
 
 const mammaMiaContact = (req, res) => {
     res.render(path.join(__dirname, '../public/views', 'contact.ejs'));
+}
 
+const mammaMia404 = (req, res) => {
+    res.status(404).render(path.join(__dirname, '../public/views', '404.ejs'));
 }
 
 module.exports = {
@@ -176,7 +239,8 @@ module.exports = {
     mammaMiaYourOrderGet,
     mammaMiaYourOrderPost,
     mammaMiaAbout,
-    mammaMiaContact
-
-
+    mammaMiaContact,
+    mammaMia404,
+    mammaMiaYourOrderGetSingle,
+    mammaMiaYourOrderDelete
 }

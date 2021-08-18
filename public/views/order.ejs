@@ -143,27 +143,32 @@
 						<form action="/your-order" id="form-wrap" method="POST">
 							<div class="row form-group">
 								<div class="col-md-12">
-									<label for="pizza" name="from">Choose Pizza</label>
+									<label for="pizza">Choose Pizza</label>
 									<select name="to" id="pizza" class="form-control custom_select">
-										<option value="<%- name[0] -%>" style="color: black;"><%- name[0] -%></option>
-										<option value="<%- name[1] -%>" style="color: black;"><%- name[1] -%></option>
-										<option value="<%- name[2] -%>" style="color: black;"><%- name[2] -%></option>
-										<option value="<%- name[3] -%>" style="color: black;"><%- name[3] -%></option>
-										<option value="<%- name[4] -%>" style="color: black;"><%- name[4] -%></option>
-										<option value="<%- name[5] -%>" style="color: black;"><%- name[5] -%></option>
-										<option value="<%- name[6] -%>" style="color: black;"><%- name[6] -%></option>
-										<option value="<%- name[7] -%>" style="color: black;"><%- name[7] -%></option>
+										<option value="<%= name[0] %>" style="color: black;"><%= name[0] %>
+										</option>
+										<option value="<%= name[1] %>" style="color: black;"><%= name[1] %></option>
+										<option value="<%= name[2] %>" style="color: black;"><%= name[2] %></option>
+										<option value="<%= name[3] %>" style="color: black;"><%= name[3] %></option>
+										<option value="<%= name[4] %>" style="color: black;"><%= name[4] %></option>
+										<option value="<%= name[5] %>" style="color: black;"><%= name[5] %></option>
+										<option value="<%= name[6] %>" style="color: black;"><%= name[6] %></option>
+										<option value="<%= name[7] %>" style="color: black;"><%= name[7] %></option>
 									</select>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12">
-									<label for="many" name="from2">Ingredients</label>
+									<label for="many">Ingredients</label>
 									<select name="to2" id="ingredients" class="form-control custom_select">
-										<option value="#" style="color: black;">mushrooms</option>
-										<option value="#" style="color: black;">tomatoes</option>
-										<option value="#" style="color: black;">pineapple</option>
-										<option value="#" style="color: black;">olives</option>
+										<option value="<%= ingredients[0] %>" style="color: black;">
+											<%= ingredients[0] %>></option>
+										<option value="<%= ingredients[1] %>" style="color: black;">
+											<%= ingredients[1] %></option>
+										<option value="<%= ingredients[2] %>" style="color: black;">
+											<%= ingredients[2] %></option>
+										<option value="<%= ingredients[3] %>" style="color: black;">
+											<%= ingredients[3] %></option>
 									</select>
 								</div>
 							</div>
@@ -181,4 +186,4 @@
 			</div>
 		</div>
 
-		<%-include('./partials/footer.ejs')-%>
+		<%-include('./partials/footer.ejs') %>
