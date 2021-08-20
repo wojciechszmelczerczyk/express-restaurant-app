@@ -56,25 +56,34 @@ module.exports.signup_post = async (req, res) => {
             console.log(`this is hashed password: ${password}`);
 
             // save email and hashed password in db
-            user.insertOne({
+            const currentUser = await user.insertOne({
                 email,
                 password,
             })
 
+            console.log(`Inserted ID: ${currentUser.insertedId}`);
 
-            const currentUser = await user.findOne({ // get access to id of current user 
-                password
-            });
 
-            console.log(`Current user password: ${currentUser.password}`)
+
+            // const currentUser = await user.findOne({ // get access to id of current user 
+            //     password
+            // });
+
+            // console.log(`Current user password: ${currentUser.password}`)
 
             // token
-            const token = createToken(currentUser._id);
-            console.log(token);
+            const token = createToken(currentUser.insertedId);
+            console.log(`Token is ${token}`);
             res.cookie('jwt', token, {
                 httpOnly: true,
-                maxAge: maxAge * 1000 // why don't generate cookie?
+                maxAge: maxAge * 1000 // generate cookies
             });
+
+            res.status(201).json({ // working but i have to do research
+                currentUser: currentUser.insertedId
+            })
+
+
         }
         // res.status(201).json({
         //     user: user2._id 
