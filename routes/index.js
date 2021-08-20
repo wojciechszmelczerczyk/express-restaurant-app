@@ -1,10 +1,11 @@
-const path = require('path');
-// const express = require('express');
-// const app = express();
+// cookie parser
+const cookieParser = require('cookie-parser');
 
 // controller
 const mammaMiaController = require('../controllers/mammaMiaController');
 
+// auth route
+const authRoutes = require('./auth')
 
 // database
 const mongo = require('mongodb');
@@ -27,13 +28,15 @@ function wrapper(app) {
     app.set('template engine', 'ejs');
 
 
-    // middleware
+    // middleware for static files
     app.use('/static', express.static('public'));
 
     app.use(express.json());
     app.use(express.urlencoded({
         extended: true
     }));
+    // cookie middleware
+    app.use(cookieParser());
 
     // routing
     app.get('/', mammaMiaController.mammaMiaHome);
@@ -47,6 +50,8 @@ function wrapper(app) {
     app.delete('/your-order/:id', mammaMiaController.mammaMiaYourOrderDelete) // delete single order
     app.get('/about', mammaMiaController.mammaMiaAbout);
     app.get('/contact', mammaMiaController.mammaMiaContact);
+    app.use(authRoutes); // auth routing
+
     app.use(mammaMiaController.mammaMia404) // 404 not found
 
 }
