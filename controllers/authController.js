@@ -1,6 +1,4 @@
-// for debugging purposes
-const colors = require('colors')
-
+const colors = require('colors');
 const path = require('path');
 const bcrypt = require("bcryptjs");
 
@@ -14,9 +12,6 @@ const client = new mongo.MongoClient('mongodb://localhost:27017', { // connect t
     useNewUrlParser: true
 });
 
-// mongoose
-const mongoose = require('mongoose');
-const User = require('../models/User');
 
 
 // function for tokens
@@ -32,36 +27,38 @@ const createToken = (id) => {
 
 // function for logging the user
 
-// const login = async (email, password) => {
-//     client.connect(async (err) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             console.log('Connected to the database');
+const login = async (email, password) => {
+    client.connect(async (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Connected to the database');
 
-//             const db = client.db('MammaMia');
+            const db = client.db('MammaMia');
 
-//             const user = db.collection('user');
+            const user = db.collection('user');
 
-//             const thisUser = await user.findOne({
-//                 email
-//             });
-//             if (thisUser) {
-//                 const auth = await bcrypt.compare(password, thisUser.password) // comparing hashed password with user log in with hashed password in db
-//                 if (auth) {
-//                     return thisUser;
-//                 }
-//                 throw Error('Incorrect password')
-//             } else {
-//                 throw Error('Incorrect email');
-//             }
+            const thisUser = await user.findOne({
+                email
+            });
+            console.log(colors.bgMagenta(thisUser._id));
+            if (thisUser) {
+                const auth = await bcrypt.compare(password, thisUser.password) // comparing hashed password with user log in with hashed password in db
+                console.log(colors.bgBlue(`Authentication: ${auth}`));
+                if (auth) {
+                    return thisUser;
+                }
+                throw Error('Incorrect password')
+            } else {
+                throw Error('Incorrect email');
+            }
 
 
 
-//         }
+        }
 
-//     });
-// }
+    });
+}
 
 module.exports.signup_get = (req, res) => {
     res.render(path.join(__dirname, '../public/views', 'signup.ejs'));
@@ -91,9 +88,7 @@ module.exports.signup_post = async (req, res) => {
 
             // creating salt and hash for password
             const salt = await bcrypt.genSalt();
-            console.log(`this is salt: ${salt}`);
             password = await bcrypt.hash(password, salt)
-            console.log(`this is hashed password: ${password}`);
 
             // save email and hashed password in db
             const currentUser = await user.insertOne({
@@ -101,7 +96,6 @@ module.exports.signup_post = async (req, res) => {
                 password,
             })
 
-            console.log(colors.red(`Inserted ID: ${currentUser.insertedId}`));
 
 
             // token
@@ -129,17 +123,19 @@ module.exports.login_post = async (req, res) => {
         password
     } = req.body; // extract form values into email and password via destructurization 
 
-    mongoose.connect('mongodb://localhost:27017/MammaMia', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-
     try {
-        const user = await User.login(email, password);
+        login(email, password) // function which compare data from login form with db data
+        const token = createToken(thisUser._id); //TODO: no access to this variable outside the login function, come up with some solution
+
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: maxAge * 1000 // generate cookies
+        });
         res.status(200).json({
-            user: user._id
+            thisUser: thisUser._id //TODO: no access to this variable outside the login function, come up with some solution
         });
     } catch (err) {
+        console.log(err);
         res.status(400).json({});
     }
 

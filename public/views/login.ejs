@@ -139,7 +139,7 @@
         <script src="static/js/main.js"></script>
         <!--POST-->
         <script>
-            // debugger;
+            debugger;
             const form = document.querySelector('form');
             form.addEventListener('submit', async e => {
                 e.preventDefault();
@@ -158,7 +158,7 @@
                     })
                     const data = await res.json();
 
-                    if (data.user) {
+                    if (data.thisUser) {
                         location.assign('/')
                     }
                 } catch (err) {
