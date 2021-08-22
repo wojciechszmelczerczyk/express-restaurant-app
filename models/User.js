@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
 });
 
 // static method to login user
-
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({
         email

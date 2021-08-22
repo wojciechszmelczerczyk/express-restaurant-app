@@ -7,8 +7,6 @@ const router = Router();
 // auth controller
 const authController = require('../controllers/authController');
 
-
-
 // sign up endpoint
 router.route('/login')
     .get(authController.login_get)

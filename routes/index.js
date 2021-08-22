@@ -8,22 +8,32 @@ const mammaMiaController = require('../controllers/mammaMiaController');
 const authRoutes = require('./auth')
 
 // database
-const mongo = require('mongodb');
 const express = require('express');
-const client = new mongo.MongoClient('mongodb://localhost:27017', { // connect to mongodb
-    useNewUrlParser: true
-});
+const mongoose = require('mongoose');
 
 // port
 const port = process.env.port || 3000;
 
 function wrapper(app) {
 
+    // try connect db
+    mongoose.connect('mongodb://localhost:27017/MammaMia', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    const db = mongoose.connection;
+    console.log('Attempt to connect to db');
+
     // listening on port 3000
-    app.listen(port, () => {
-        console.log(`Server running at:http://127.0.0.1:${port}`);
+    db.once('open', () => {
+        console.log('Connected to db');
+        app.listen(port, () => {
+            console.log(`Server running at:http://127.0.0.1:${port}`);
+        });
     });
 
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
     // template engine
     app.set('template engine', 'ejs');
 
