@@ -140,7 +140,7 @@
         <!--POST-->
         <script>
             const form = document.querySelector('form');
-            form.addEventListener('submit', async (e) => {
+            form.addEventListener('submit', async e => {
                 e.preventDefault();
                 const email = form.email.value;
                 const password = form.password.value;
@@ -154,7 +154,13 @@
                         headers: {
                             'Content-type': 'application/json'
                         }
+
                     })
+                    const data = await res.json();
+
+                    if (data.currentUser) {
+                        location.assign('/');
+                    }
                 } catch (err) {
                     console.log(err);
                 }

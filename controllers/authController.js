@@ -1,16 +1,23 @@
+// for debugging purposes
+const colors = require('colors')
+
 const path = require('path');
 const bcrypt = require("bcryptjs");
 
 // jwt
 const jwt = require('jsonwebtoken');
 
-
-
-// database
+// mongodb
 const mongo = require('mongodb');
+const express = require('express');
 const client = new mongo.MongoClient('mongodb://localhost:27017', { // connect to mongodb
     useNewUrlParser: true
 });
+
+// mongoose
+const mongoose = require('mongoose');
+const User = require('../models/User');
+
 
 // function for tokens
 const maxAge = 3 * 24 * 60 * 60 // 3 days in seconds
@@ -22,6 +29,39 @@ const createToken = (id) => {
         expiresIn: maxAge
     })
 }
+
+// function for logging the user
+
+// const login = async (email, password) => {
+//     client.connect(async (err) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log('Connected to the database');
+
+//             const db = client.db('MammaMia');
+
+//             const user = db.collection('user');
+
+//             const thisUser = await user.findOne({
+//                 email
+//             });
+//             if (thisUser) {
+//                 const auth = await bcrypt.compare(password, thisUser.password) // comparing hashed password with user log in with hashed password in db
+//                 if (auth) {
+//                     return thisUser;
+//                 }
+//                 throw Error('Incorrect password')
+//             } else {
+//                 throw Error('Incorrect email');
+//             }
+
+
+
+//         }
+
+//     });
+// }
 
 module.exports.signup_get = (req, res) => {
     res.render(path.join(__dirname, '../public/views', 'signup.ejs'));
@@ -61,15 +101,8 @@ module.exports.signup_post = async (req, res) => {
                 password,
             })
 
-            console.log(`Inserted ID: ${currentUser.insertedId}`);
+            console.log(colors.red(`Inserted ID: ${currentUser.insertedId}`));
 
-
-
-            // const currentUser = await user.findOne({ // get access to id of current user 
-            //     password
-            // });
-
-            // console.log(`Current user password: ${currentUser.password}`)
 
             // token
             const token = createToken(currentUser.insertedId);
@@ -85,20 +118,29 @@ module.exports.signup_post = async (req, res) => {
 
 
         }
-        // res.status(201).json({
-        //     user: user2._id 
-        // });
+
     });
 }
 
 module.exports.login_post = async (req, res) => {
 
-    // const {
-    //     email,
-    //     password
-    // } = req.body;
+    const {
+        email,
+        password
+    } = req.body; // extract form values into email and password via destructurization 
 
-    // console.log(email, password)
+    mongoose.connect('mongodb://localhost:27017/MammaMia', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
 
-    res.send('new login');
+    try {
+        const user = await User.login(email, password);
+        res.status(200).json({
+            user: user._id
+        });
+    } catch (err) {
+        res.status(400).json({});
+    }
+
 }
