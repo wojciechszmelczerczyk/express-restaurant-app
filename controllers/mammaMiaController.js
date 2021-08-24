@@ -4,6 +4,9 @@ const client = new mongo.MongoClient('mongodb://localhost:27017', { // connect t
     useNewUrlParser: true
 });
 const path = require('path');
+// const {
+//     start
+// } = require('repl');
 
 const mammaMiaHome = (req, res) => {
     client.connect((err) => { // connect to mongodb
@@ -113,22 +116,39 @@ const mammaMiaOrder = (req, res) => {
 }
 
 const mammaMiaYourOrderGet = (req, res) => {
-    client.connect((err) => {
+    client.connect(async (err) => {
         if (err) {
             console.log(err);
         } else {
+
             console.log('Connected to the database');
 
             const db = client.db('MammaMia');
 
             const order = db.collection('order');
 
-            order.find({}).toArray((err, items) => {
+            // total number of records from database
+            let total = await order.countDocuments();
+
+
+            // console.log(total);
+
+            let perPage = 5;
+
+            let pages = Math.ceil(total / perPage);
+
+            let pageNumber = (req.query.page == null) ? 1 : req.query.page;
+            let startFrom = (pageNumber - 1) * perPage;
+
+            order.find({}).sort({
+                "id": -1
+            }).skip(startFrom).limit(perPage).toArray((err, items) => {
                 if (err) {
                     console.log(err);
                 } else {
                     res.render(path.join(__dirname, '../public/views', 'your-order.ejs'), {
                         names: items,
+                        pages: pages
 
                     });
                 }

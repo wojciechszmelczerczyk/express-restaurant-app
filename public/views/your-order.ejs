@@ -109,6 +109,17 @@
 
                 <% }); %>
             </ul>
+
+            <ul class="pagination">
+                <% for (var a = 1; a <= pages; a++) { %>
+                <li>
+                    <a href="?page=<%= a; %>">
+                        <%= a; %>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+
         </nav>
 
 
