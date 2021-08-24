@@ -100,6 +100,9 @@
 
                             <li><a href="about">About</a></li>
                             <li><a href="contact">Contact</a></li>
+                            <li class="active"><a href="/login">Log in</a></li>
+                            <li><a href="/logout">Log out</a></li>
+                            <li><a href="/signup" class="btn">Sign up</a></li>
                         </ul>
                     </div>
                 </div>
@@ -112,10 +115,10 @@
                     <h2>Log in</h2>
                     <label for="email">Email</label>
                     <input type="text" name="email" required>
-                    <div class="email error"></div>
+                    <div class="email error">HUNHUNHUNHUN</div>
                     <label for="password">Password</label>
                     <input type="password" name="password" required>
-                    <div class="password error"></div>
+                    <div class="password error">HUNHUNHUNHUN</div>
                     <button>Log in</button>
                 </form>
             </div>
@@ -139,10 +142,15 @@
         <script src="static/js/main.js"></script>
         <!--POST-->
         <script>
-            debugger;
             const form = document.querySelector('form');
+            const emailError = document.querySelector('.email.error');
+            const passwordError = document.querySelector('.password.error');
+
+
             form.addEventListener('submit', async e => {
                 e.preventDefault();
+                emailError.textContent = '';
+                passwordError.textContent = '';
                 const email = form.email.value;
                 const password = form.password.value;
                 try {
@@ -160,6 +168,9 @@
 
                     if (data.thisUser) {
                         location.assign('/')
+                    } else if (data.errors) {
+                        emailError.textContent = data.errors.email
+                        passwordError.textContent = data.errors.password
                     }
                 } catch (err) {
                     console.log(err);

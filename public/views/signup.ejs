@@ -100,6 +100,9 @@
 
                             <li><a href="about">About</a></li>
                             <li><a href="contact">Contact</a></li>
+                            <li><a href="/login">Log in</a></li>
+                            <li><a href="/logout">Log out</a></li>
+                            <li class=><a href="/signup" class="btn">Sign up</a></li>
                         </ul>
                     </div>
                 </div>
@@ -140,8 +143,14 @@
         <!--POST-->
         <script>
             const form = document.querySelector('form');
+            const emailError = document.querySelector('.email.error');
+            const passwordError = document.querySelector('.password.error');
+
             form.addEventListener('submit', async e => {
                 e.preventDefault();
+                emailError.textContent = '';
+                passwordError.textContent = '';
+
                 const email = form.email.value;
                 const password = form.password.value;
                 try {
@@ -160,6 +169,10 @@
 
                     if (data.currentUser) {
                         location.assign('/');
+                    } else if (data.errors) {
+                        emailError.textContent = data.errors.email;
+                        passwordError.textContent = data.errors.password;
+
                     }
                 } catch (err) {
                     console.log(err);

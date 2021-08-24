@@ -8,7 +8,6 @@ const router = Router();
 const authController = require('../controllers/authController');
 
 
-
 // sign up endpoint
 router.route('/login')
     .get(authController.login_get)
@@ -20,6 +19,8 @@ router.route('/login')
 router.route('/signup')
     .get(authController.signup_get)
     .post(authController.signup_post)
+
+router.get('/logout', authController.logout_get);
 
 
 

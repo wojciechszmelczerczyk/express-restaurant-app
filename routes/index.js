@@ -7,6 +7,12 @@ const mammaMiaController = require('../controllers/mammaMiaController');
 // auth route
 const authRoutes = require('./auth')
 
+// auth middleware
+
+const {
+    requireAuth
+} = require('../middleware/authMiddleware');
+
 // database
 const mongo = require('mongodb');
 const express = require('express');
@@ -42,7 +48,7 @@ function wrapper(app) {
     app.get('/', mammaMiaController.mammaMiaHome);
     app.get('/menu', mammaMiaController.mammaMiaMenu);
     app.get('/gallery', mammaMiaController.mammaMiaGallery);
-    app.get('/order', mammaMiaController.mammaMiaOrder)
+    app.get('/order', requireAuth, mammaMiaController.mammaMiaOrder)
     app.route('/your-order')
         .get(mammaMiaController.mammaMiaYourOrderGet)
         .post(mammaMiaController.mammaMiaYourOrderPost);
